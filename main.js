@@ -116,3 +116,27 @@ const isPalindrome = (string) => {
   const reverse = reverseString(string);
   return string === reverse;
 };
+
+//2. FizzBuzz
+const fizzBuzz = (number) => {
+  if (number % 3 === 0 && number % 5 === 0) {
+    return "FizzBuzz";
+  } else if (number % 3 === 0) {
+    return "Fizz";
+  } else if (number % 5 === 0) {
+    return "Fizz";
+  }
+  return number;
+};
+
+//3. Factorial Calculator
+const factorial = (number) => {
+  let sum = number;
+  while (number > 1) {
+    number--;
+    sum = sum * number;
+  }
+  return sum;
+};
+
+//4. Longest Word
