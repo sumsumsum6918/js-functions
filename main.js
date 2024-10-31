@@ -83,4 +83,36 @@ const findMax = (number1, number2) => {
 };
 
 //13. Count Vowels
-const countVowels = () => {};
+const vowels = "aeiouAEIOU";
+const countVowels = (word) => {
+  let count = 0;
+  for (const character of word) {
+    if (vowels.includes(character)) {
+      count++;
+    }
+  }
+  return count;
+};
+
+//14. Discount Price
+const calculateDiscount = (originalPrice, discountPercentage) => {
+  return (originalPrice * discountPercentage) / 100;
+};
+
+//Reverse String
+const reverseString = (string) => {
+  let reverse = "";
+  for (const word of string) {
+    reverse = word + reverse;
+  }
+  return reverse;
+};
+//  return string.split("").reverse().join("");
+
+//Level Intermediate
+//1. Palindrome Checker
+const isPalindrome = (string) => {
+  string = string.toLowerCase();
+  const reverse = reverseString(string);
+  return string === reverse;
+};
