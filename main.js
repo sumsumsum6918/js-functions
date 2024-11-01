@@ -140,3 +140,65 @@ const factorial = (number) => {
 };
 
 //4. Longest Word
+const findLongestWord = (sentance) => {
+  const words = sentance.split(" ");
+  let wordLength = 0;
+  let longestWord = "";
+  words.forEach((word) => {
+    if (word.length > wordLength) {
+      wordLength = word.length;
+      longestWord = word;
+      return wordLength;
+    }
+    if (word.length === wordLength) {
+      longestWord = longestWord + " " + word;
+    }
+  });
+  return longestWord;
+};
+
+//5. Array Average
+const calculateAverage = (array) => {
+  let sum = 0;
+  for (const number of array) {
+    sum += number;
+  }
+  return sum / array.length;
+};
+
+//6. Remove Duplicates
+const removeDuplicates = (array) => {
+  const newArray = [];
+
+  for (let i = 0; i < array.length; i++) {
+    if (!newArray.includes(array[i])) {
+      newArray.push(array[i]);
+    }
+  }
+  return newArray;
+};
+
+//7. Capitalize First Letter
+const capitalizeFirstLetter = (string) => {
+  const letters = string.split("");
+  letters[0] = letters[0].toUpperCase();
+  string = letters.join("");
+
+  return string;
+};
+
+//8. Count Occurrences
+const countOccurrences = (string, character) => {
+  let count = 0;
+  character = character.toLowerCase();
+  string = string.toLowerCase();
+
+  for (let i = 0; i < string.length; i++) {
+    if (string[i] === character) {
+      count++;
+    }
+  }
+  return count;
+};
+
+//9. Random Password Generator
