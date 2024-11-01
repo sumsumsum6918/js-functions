@@ -188,17 +188,125 @@ const capitalizeFirstLetter = (string) => {
 };
 
 //8. Count Occurrences
-const countOccurrences = (string, character) => {
+const countOccurrences = (string, letter) => {
   let count = 0;
-  character = character.toLowerCase();
+  letter = letter.toLowerCase();
   string = string.toLowerCase();
 
   for (let i = 0; i < string.length; i++) {
-    if (string[i] === character) {
+    if (string[i] === letter) {
       count++;
     }
   }
   return count;
 };
 
-//9. Random Password Generator
+//9. Merge Arrays
+const mergeArrays = (array1, array2) => {
+  const newArray = [];
+  for (const item of array1) {
+    if (!newArray.includes(item)) {
+      newArray.push(item);
+    }
+  }
+  for (const item of array2) {
+    if (!newArray.includes(item)) {
+      newArray.push(item);
+    }
+  }
+  return newArray;
+};
+
+//10. Random Password Generator
+const numbers = { start: 48, end: 57 };
+const upperCase = { start: 65, end: 90 };
+const lowerCase = { start: 97, end: 122 };
+
+const allKeyCodes = [numbers, upperCase, lowerCase].reduce(
+  (keyCodes, { start, end }) => {
+    for (let i = start; i <= end; i++) {
+      keyCodes.push(i);
+    }
+    return keyCodes;
+  },
+  [] //reduce objects into an array
+);
+
+// pick a random character from allKeyCodes
+const randomChar = () => {
+  const index = Math.floor(Math.random() * allKeyCodes.length);
+  return String.fromCharCode(allKeyCodes[index]);
+};
+
+/**
+ *
+ * @param {number} length
+ * @returns
+ */
+const generatePassword = (length) =>
+  Array(length).fill(null).map(randomChar).join("");
+
+//let regex = /^(?=.*[a-z])(?=*[A-Z])(?=*[0-9]).{}$/;
+/* 48-57 65-90 97-122
+----6-----6--
+ if (randomNumber >= 0 && randomNumber < 10) {
+      passwordArray.push(String.fromCharCode(randomNumber + 48));
+    } else if (randomNumber >= 10 && randomNumber < 36) {
+      passwordArray.push(String.fromCharCode(randomNumber + 55));
+    } else if (randomNumber >= 36 && randomNumber < 62) {
+      passwordArray.push(String.fromCharCode(randomNumber + 61));
+    }
+  }
+*/
+
+//11. Character Frequency
+const charFrequency = (string) => {
+  string = string.toLowerCase();
+
+  const array = string.split("");
+  const charObject = {};
+
+  array.forEach((char) => {
+    if (!charObject[char]) {
+      charObject[char] = 1;
+    }
+    if (charObject[char]) {
+      charObject[char]++;
+    }
+  });
+  return charObject;
+};
+
+//12. Intersection of Arrays
+const arrayIntersection = (array1, array2) => {
+  const newArray = [];
+  for (const item of array1) {
+    for (const i of array2) {
+      if (item === i) {
+        newArray.push(item);
+      }
+    }
+  }
+  return newArray;
+};
+
+//13. String Reversal
+const reverseWords = (string) => {
+  const newString = [];
+
+  const array = string.split(" ");
+
+  for (const item of array) {
+    newString.unshift(item);
+  }
+  return newString.join(" ");
+};
+
+//14. Find Minimum
+const findMin = (array) => {
+  const minNumber = array.reduce((minNum, currentNum) => {
+    if (minNum < currentNum) return minNum;
+    return currentNum;
+  }, array[0]);
+  return minNumber;
+};
