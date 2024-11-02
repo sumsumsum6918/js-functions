@@ -1,31 +1,25 @@
-const generateRandomNumber = (array) => {
-  return (randomNumber = Math.floor(Math.random() * array.length));
-};
+const generateRandomNumber = (array) =>
+  Math.floor(Math.random() * array.length);
 
 //Level Easy"
 //Segment 1: Functions with No Parameters and No Return Values
 
 //1. Basic Greeting");
-const greet = () => {
-  return "Hello, World!";
-};
+const greet = () => "Hello, World!";
 
 //2. Favorite Number");
-const favoriteNumber = () => {
-  return 6;
-};
+const favoriteNumber = () => 6;
 
 //3. Magic Eight Ball");
 const magicEightBallResponses = ["Yes", "No", "Maybe", "Ask again later"];
 const magicEightBall = () => {
-  const randomNumber = generateRandomNumber(magicEightBallResponses);
-  return magicEightBallResponses[randomNumber];
+  // Generate a random index for the responses array
+  const randomIndex = generateRandomNumber(magicEightBallResponses);
+  return magicEightBallResponses[randomIndex];
 };
 
 //"4. Current Year");
-const getCurrentYear = () => {
-  return new Date().getFullYear();
-};
+const getCurrentYear = () => new Date().getFullYear();
 
 //5. Random Joke");
 const jokes = [
@@ -41,50 +35,39 @@ const jokes = [
   "joke10",
 ];
 const tellJoke = () => {
-  const randomNumber = generateRandomNumber(jokes);
-  return jokes[randomNumber];
+  // Select a random joke from the jokes array
+  const randomIndex = generateRandomNumber(jokes);
+  return jokes[randomIndex];
 };
 
 //Segment 2: Functions with Parameters (One or More)
 //6. Personalized Greeting");
-const personalGreeting = (username) => {
-  return `Hello, ${username}!`;
-};
+const personalGreeting = (username) => `Hello, ${username}!`;
 
 //7. Sum of Two Numbers");
-const add = (number1, number2) => {
-  return number1 + number2;
-};
+const add = (number1, number2) => number1 + number2;
 
 //8. Age in Months");
-const ageInMonths = (age) => {
-  return age * 12 + "months";
-};
+const ageInMonths = (age) => `${age * 12} + months`;
 
 //9. Temperature Converter");
-const celsiusToFahrenheit = (celsiusTemp) => {
-  return (9 / 5) * celsiusTemp + 32 + "F";
-};
+const celsiusToFahrenheit = (celsiusTemp) => `${(9 / 5) * celsiusTemp + 32} F`;
 
 //10. Full Name");
-const getFullName = (firstName, lastName) => {
-  return firstName + " " + lastName;
-};
+const getFullName = (firstName, lastName) => `${firstName} ${lastName}`;
 
 //Segment 3: Functions with Parameters and Return Values
 //11. Area of a Rectangle");
-const calculateArea = (length, width) => {
-  return length * width;
-};
+const calculateArea = (length, width) => length * width;
 
-//12. Find Maximum");
-const findMax = (number1, number2) => {
-  return number1 > number2 ? number1 : number2;
-};
+//12. Find Maximum
+const findMax = (number1, number2) => (number1 > number2 ? number1 : number2);
 
 //13. Count Vowels
 const vowels = "aeiouAEIOU";
+
 const countVowels = (word) => {
+  if (!word) return 0;
   let count = 0;
   for (const character of word) {
     if (vowels.includes(character)) {
@@ -96,23 +79,18 @@ const countVowels = (word) => {
 
 //14. Discount Price
 const calculateDiscount = (originalPrice, discountPercentage) => {
-  return (originalPrice * discountPercentage) / 100;
+  const discountAmount = (originalPrice * discountPercentage) / 100;
+  return originalPrice - discountAmount;
 };
 
-//Reverse String
-const reverseString = (string) => {
-  let reverse = "";
-  for (const word of string) {
-    reverse = word + reverse;
-  }
-  return reverse;
-};
-//  return string.split("").reverse().join("");
+//15. Reverse String
+const reverseString = (string) => string.split("").reverse().join("");
 
 //Level Intermediate
 //1. Palindrome Checker
 const isPalindrome = (string) => {
-  string = string.toLowerCase();
+  // Convert the string to lowercase and remove non-alphanumeric characters
+  string = string.toLowerCase().replace(/[^a-z0-9]/g, "");
   const reverse = reverseString(string);
   return string === reverse;
 };
