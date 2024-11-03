@@ -91,8 +91,7 @@ const reverseString = (string) => string.split("").reverse().join("");
 const isPalindrome = (string) => {
   // Convert the string to lowercase and remove non-alphanumeric characters
   string = string.toLowerCase().replace(/[^a-z0-9]/g, "");
-  const reverse = reverseString(string);
-  return string === reverse;
+  return string === reverseString(string);
 };
 
 //2. FizzBuzz
@@ -102,19 +101,24 @@ const fizzBuzz = (number) => {
   } else if (number % 3 === 0) {
     return "Fizz";
   } else if (number % 5 === 0) {
-    return "Fizz";
+    return "Buzz";
   }
   return number;
 };
 
 //3. Factorial Calculator
 const factorial = (number) => {
-  let sum = number;
-  while (number > 1) {
-    number--;
-    sum = sum * number;
+  if (number < 0) {
+    return "Factorial is not defined for negative numbers.";
   }
-  return sum;
+  if (number === 0) return 1;
+
+  let result = 1;
+  while (number > 1) {
+    result *= number;
+    number--;
+  }
+  return result;
 };
 
 //4. Longest Word
@@ -122,13 +126,12 @@ const findLongestWord = (sentance) => {
   const words = sentance.split(" ");
   let wordLength = 0;
   let longestWord = "";
+
   words.forEach((word) => {
     if (word.length > wordLength) {
       wordLength = word.length;
       longestWord = word;
-      return wordLength;
-    }
-    if (word.length === wordLength) {
+    } else if (word.length === wordLength) {
       longestWord = longestWord + " " + word;
     }
   });
@@ -137,6 +140,8 @@ const findLongestWord = (sentance) => {
 
 //5. Array Average
 const calculateAverage = (array) => {
+  if (array.length === 0) return 0;
+
   let sum = 0;
   for (const number of array) {
     sum += number;
@@ -146,53 +151,36 @@ const calculateAverage = (array) => {
 
 //6. Remove Duplicates
 const removeDuplicates = (array) => {
-  const newArray = [];
-
-  for (let i = 0; i < array.length; i++) {
-    if (!newArray.includes(array[i])) {
-      newArray.push(array[i]);
-    }
-  }
-  return newArray;
+  return array.filter(
+    (currentNum, index, self) => self.indexOf(currentNum) === index
+  );
 };
 
 //7. Capitalize First Letter
 const capitalizeFirstLetter = (string) => {
-  const letters = string.split("");
-  letters[0] = letters[0].toUpperCase();
-  string = letters.join("");
+  if (string.length === 0) return string;
 
-  return string;
+  return string[0].toUpperCase() + string.slice(1);
 };
 
 //8. Count Occurrences
 const countOccurrences = (string, letter) => {
-  let count = 0;
   letter = letter.toLowerCase();
   string = string.toLowerCase();
 
-  for (let i = 0; i < string.length; i++) {
-    if (string[i] === letter) {
-      count++;
-    }
-  }
-  return count;
+  //splits the string into an array with letter
+  return string.split(letter).length - 1;
 };
 
 //9. Merge Arrays
 const mergeArrays = (array1, array2) => {
-  const newArray = [];
-  for (const item of array1) {
-    if (!newArray.includes(item)) {
-      newArray.push(item);
-    }
-  }
-  for (const item of array2) {
-    if (!newArray.includes(item)) {
-      newArray.push(item);
-    }
-  }
-  return newArray;
+  const newArray = [...array1, ...array2];
+
+  const resultArray = newArray.filter(
+    (item, index) => newArray.indexOf(item) === index
+  );
+
+  return resultArray;
 };
 
 //10. Random Password Generator
@@ -224,67 +212,34 @@ const randomChar = () => {
 const generatePassword = (length) =>
   Array(length).fill(null).map(randomChar).join("");
 
-//let regex = /^(?=.*[a-z])(?=*[A-Z])(?=*[0-9]).{}$/;
-/* 48-57 65-90 97-122
-----6-----6--
- if (randomNumber >= 0 && randomNumber < 10) {
-      passwordArray.push(String.fromCharCode(randomNumber + 48));
-    } else if (randomNumber >= 10 && randomNumber < 36) {
-      passwordArray.push(String.fromCharCode(randomNumber + 55));
-    } else if (randomNumber >= 36 && randomNumber < 62) {
-      passwordArray.push(String.fromCharCode(randomNumber + 61));
-    }
-  }
-*/
-
 //11. Character Frequency
 const charFrequency = (string) => {
   string = string.toLowerCase();
-
-  const array = string.split("");
   const charObject = {};
 
-  array.forEach((char) => {
+  for (const char of string) {
     if (!charObject[char]) {
       charObject[char] = 1;
-    }
-    if (charObject[char]) {
-      charObject[char]++;
-    }
-  });
+    } else charObject[char]++;
+  }
   return charObject;
 };
 
 //12. Intersection of Arrays
 const arrayIntersection = (array1, array2) => {
-  const newArray = [];
-  for (const item of array1) {
-    for (const i of array2) {
-      if (item === i) {
-        newArray.push(item);
-      }
-    }
-  }
+  const newArray = array1.filter((item) => array2.includes(item));
   return newArray;
 };
 
 //13. String Reversal
 const reverseWords = (string) => {
-  const newString = [];
-
-  const array = string.split(" ");
-
-  for (const item of array) {
-    newString.unshift(item);
-  }
-  return newString.join(" ");
+  return string.split(" ").reverse().join(" ");
 };
 
 //14. Find Minimum
 const findMin = (array) => {
   const minNumber = array.reduce((minNum, currentNum) => {
-    if (minNum < currentNum) return minNum;
-    return currentNum;
+    return Math.min(minNum, currentNum);
   }, array[0]);
   return minNumber;
 };
